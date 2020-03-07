@@ -1,0 +1,71 @@
+<html>
+<head>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js"></script>
+<script src="https://www.chartjs.org/samples/latest/utils.js"></script>
+<meta http-equiv="refresh" content="360">
+
+</head>
+
+<body>
+<h1>
+Number of current viewers
+</h2>
+<h3>From T-~8 hours to now</h3>
+
+<canvas id="chart"  ></canvas>
+<script>
+
+
+
+d3.csv('http://stream.pvtv.xxxxx.yyy/stat/stat.csv').then(makeChart);
+// d3.csv('https://s3-us-west-2.amazonaws.com/s.cdpn.io/2814973/atp_wta.csv').then(makeChart);
+function makeChart(viewers) {
+
+var dateLabels = viewers.map(function(d) {return d.date});
+var viewerData = viewers.map(function(d) {return d.viewers});
+var fromipData = viewers.map(function(d) {return d.fromip});
+
+
+var chart = new Chart('chart', {
+  type: 'line',
+  data: {
+    labels: dateLabels,
+    datasets: [
+      {
+	label: "viewers",
+        data: viewerData,
+	borderColor: window.chartColors.red,
+	fill: false},
+	{
+	label: "ip's",
+	data: fromipData,
+	borderColor: window.chartColors.blue,
+	fill: true
+      }
+    ]
+  },
+   options: {
+        scales: {
+            xAxes: [{
+                ticks: {
+                    autoSkip: false,
+                    maxRotation: 90,
+                    minRotation: 90
+                }
+            }]
+        }
+    }
+});
+
+
+
+}
+    
+
+</script>
+
+</body>
+
+</html>

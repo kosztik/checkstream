@@ -2,7 +2,7 @@
 import urllib.request
 import subprocess
 
-data = urllib.request.urlopen("http://stream.pvtv.hu/stat/stream.txt") 
+data = urllib.request.urlopen("http://stream.xxxxx.yy/stat/stream.txt") 
 for line in data: 
     print (int(line))
     if (int(line)) == 0:
